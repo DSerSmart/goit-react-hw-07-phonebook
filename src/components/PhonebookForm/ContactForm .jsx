@@ -31,11 +31,11 @@ export const ContactForm = ({ onSubmit }) => {
       onSubmit={handleSubmit}
     >
       <Form>
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor="firstName">Name</label>
         <InputText name="firstName" type="text" />
         <ErrorMessage name="firstName" component="div" />
         <br />
-        <label htmlFor="tel">Tel</label>
+        <label htmlFor="tel">Number</label>
         <InputText name="tel" type="tel" />
         <ErrorMessage name="tel" component="div" />
         <br />
