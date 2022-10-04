@@ -10,6 +10,18 @@ export class App extends Component {
     contacts: [],
     filter: '',
   };
+
+  componentDidUpdate(prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      console.log('New');
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    this.setState({ contacts: parsedContacts });
+  }
   addContact = ({ firstName, tel }) => {
     const contact = {
       id: nanoid(),
@@ -21,11 +33,11 @@ export class App extends Component {
     );
     if (isContact.length) {
       alert(`${firstName} is alredy in contacts`);
-    } else {
-      this.setState(prevState => ({
-        contacts: [contact, ...prevState.contacts],
-      }));
+      return;
     }
+    this.setState(prevState => ({
+      contacts: [contact, ...prevState.contacts],
+    }));
   };
 
   handelFilter = filterText => {
