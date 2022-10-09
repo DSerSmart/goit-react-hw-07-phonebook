@@ -1,5 +1,6 @@
 import { Form, Formik, ErrorMessage } from 'formik';
 import { InputFilter } from './Filter.styled';
+import PropTypes from 'prop-types';
 
 const initialValues = {
   filter: '',
@@ -19,4 +20,8 @@ export const Filter = ({ onChange }) => {
       </Form>
     </Formik>
   );
+};
+
+Filter.propTypes = {
+  onChange: PropTypes.func,
 };

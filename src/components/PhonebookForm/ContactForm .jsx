@@ -1,6 +1,7 @@
 import { Form, Formik, ErrorMessage } from 'formik';
 import { InputText } from './ContactForm.styled';
 import * as Yup from 'yup';
+import PropTypes from 'prop-types';
 
 const initialValues = {
   firstName: '',
@@ -43,4 +44,8 @@ export const ContactForm = ({ onSubmit }) => {
       </Form>
     </Formik>
   );
+};
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func,
 };
