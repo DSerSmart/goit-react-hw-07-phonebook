@@ -57,8 +57,8 @@ export class App extends Component {
   render() {
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toUpperCase();
-    const visibleContacts = contacts.filter(contact =>
-      contact.name.toUpperCase().includes(normalizedFilter)
+    const visibleContacts = contacts.filter(({ name }) =>
+      name.toUpperCase().includes(normalizedFilter)
     );
 
     return (
@@ -68,7 +68,7 @@ export class App extends Component {
         <h2>Contacts</h2>
         <Filter onChange={this.handelFilter} />
         <ContactList
-          contacts={visibleContacts}
+          contacts={!filter ? contacts : visibleContacts}
           onButtomClick={this.deleteContact}
         />
       </Box>
