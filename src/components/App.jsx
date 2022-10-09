@@ -16,15 +16,17 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
   componentDidUpdate(prevState) {
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
-  }
-  componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
-    this.setState({ contacts: parsedContacts });
   }
   addContact = ({ firstName, tel }) => {
     const contact = {
@@ -68,7 +70,7 @@ export class App extends Component {
         <h2>Contacts</h2>
         <Filter onChange={this.handelFilter} />
         <ContactList
-          contacts={!filter ? contacts : visibleContacts}
+          contacts={visibleContacts}
           onButtomClick={this.deleteContact}
         />
       </Box>
