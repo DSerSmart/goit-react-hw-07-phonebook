@@ -15,10 +15,12 @@ export const App = () => {
     if (parsedContacts) {
       setContacts(parsedContacts);
     }
-    return () => {};
   }, []);
 
   useEffect(() => {
+    if (!contacts.length) {
+      return;
+    }
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
