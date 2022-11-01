@@ -1,15 +1,19 @@
 import { Form, Formik, ErrorMessage } from 'formik';
 import { InputFilter } from './Filter.styled';
 import PropTypes from 'prop-types';
+import { setStatusFilter } from 'redux/filterSlice';
+import { useDispatch } from 'react-redux';
 
 const initialValues = {
   filter: '',
 };
 
-export const Filter = ({ onChange }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
   const handleOnChange = event => {
     const { value: filter } = event.target;
-    onChange(filter);
+
+    dispatch(setStatusFilter(filter));
   };
   return (
     <Formik initialValues={initialValues}>
