@@ -7,7 +7,7 @@ export const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
   const statusFilter = useSelector(getStatusFilter);
-  console.log(statusFilter);
+
   const normalizedFilter = statusFilter.toUpperCase();
   const visibleContacts = contacts.filter(({ name }) =>
     name.toUpperCase().includes(normalizedFilter)
