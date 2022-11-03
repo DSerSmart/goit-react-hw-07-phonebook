@@ -1,8 +1,9 @@
 import { Form, Formik, ErrorMessage } from 'formik';
 import { InputText } from './ContactForm.styled';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/contactsSlice';
+import { getContacts } from 'redux/selectors';
 
 const initialValues = {
   firstName: '',
@@ -23,7 +24,15 @@ const schema = Yup.object().shape({
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
   const handleSubmit = (value, { resetForm }) => {
+    const isContact = contacts.filter(contact =>
+      contact.name.includes(value.firstName)
+    );
+    if (isContact.length) {
+      alert(`${value.firstName} is alredy in contacts`);
+      return;
+    }
     dispatch(addContacts(value));
     resetForm();
   };
