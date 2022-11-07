@@ -3,7 +3,7 @@ import { InputText } from './ContactForm.styled';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/contactsSlice';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 
 const initialValues = {
   firstName: '',
@@ -24,7 +24,7 @@ const schema = Yup.object().shape({
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const handleSubmit = (value, { resetForm }) => {
     const isContact = contacts.filter(contact =>
       contact.name.includes(value.firstName)
