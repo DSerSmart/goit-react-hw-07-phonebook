@@ -2,12 +2,12 @@ import { Form, Formik, ErrorMessage } from 'formik';
 import { InputText } from './ContactForm.styled';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContacts } from 'redux/contactsSlice';
 import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 
 const initialValues = {
   firstName: '',
-  tel: '',
+  phone: '',
 };
 const rePhoneNumber =
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}?$/;
@@ -17,7 +17,7 @@ const schema = Yup.object().shape({
   firstName: Yup.string()
     .matches(reLastName, 'Last Name is not valid')
     .required('Required'),
-  tel: Yup.string()
+  phone: Yup.string()
     .matches(rePhoneNumber, 'Phone number is not valid')
     .required('Required'),
 });
@@ -33,7 +33,8 @@ export const ContactForm = () => {
       alert(`${value.firstName} is alredy in contacts`);
       return;
     }
-    dispatch(addContacts(value));
+    console.log(value);
+    dispatch(addContact(value));
     resetForm();
   };
   return (
@@ -47,9 +48,9 @@ export const ContactForm = () => {
         <InputText name="firstName" type="text" />
         <ErrorMessage name="firstName" component="div" />
         <br />
-        <label htmlFor="tel">Number</label>
-        <InputText name="tel" type="tel" />
-        <ErrorMessage name="tel" component="div" />
+        <label htmlFor="phone">Number</label>
+        <InputText name="phone" type="tel" />
+        <ErrorMessage name="phone" component="div" />
         <br />
         <button type="submit">Submit</button>
       </Form>
